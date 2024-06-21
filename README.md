@@ -25,3 +25,12 @@ int main() {
     std::cout << currency_conversion(money) << std::endl;
     return 0;
 }
+```
+
+### Expected Output
+
+When you run the above example, you should see output similar to the following:
+
+```
+One Thousand Two Hundred Thirty Four Dollars and Fifty-Six Cents
+```
