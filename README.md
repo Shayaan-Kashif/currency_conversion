@@ -18,6 +18,8 @@ Here's a simple example demonstrating how to use the library:
 #include <iostream>
 #include "currency_conversion.h"
 
+using namespace CurrencyConversion;
+
 int main() {
     double money = 1234.56;
     std::cout << currency_conversion(money) << std::endl;
