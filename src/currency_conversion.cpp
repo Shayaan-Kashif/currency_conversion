@@ -46,7 +46,7 @@ string currency_conversion(double money){
     }
 
 
-    result = "Word Amount: "+dollars_result+" " +dollar+ " and "+cents_result+" "+ cent;
+    result = dollars_result+" " +dollar+ " and "+cents_result+" "+ cent;
     return result;
 
     
