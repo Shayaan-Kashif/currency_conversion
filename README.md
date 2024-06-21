@@ -5,7 +5,7 @@ A simple C++ library to convert numerical currency values into their word repres
 ## Features
 
 - Convert dollar and cent amounts to words
-- Handles single digits, tens, hundreds, and thousands
+- Handles single digits, tens, hundreds, thousands and hundred thousands
 - Supports proper pluralization for dollars and cents
 
 ## Usage
