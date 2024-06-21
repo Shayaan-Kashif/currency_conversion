@@ -275,7 +275,7 @@ string Two_Word(string word, int word_length, bool forCents){
 
 
 
-return word_amount;//Returnuing the cents string 
+return word_amount;//Returning the string 
 
 }
 
@@ -380,7 +380,7 @@ string Dollars_To_Words(string dollar_word, int dollar_length){
         length  = word.length();
         dollars_results = Three_Word(word,length);
 
-        dollar_word_amount = thousand+dollars_results;
+        dollar_word_amount = thousand+" Thousand "+dollars_results;
 
         return dollar_word_amount;
 
