@@ -5,7 +5,7 @@
 
 using namespace std;
 
-
+namespace CurrencyConversion {
 
 string currency_conversion(double money){
 
@@ -449,5 +449,5 @@ string Dollars_To_Words(string dollar_word, int dollar_length){
 
 
 
-
+}
 
