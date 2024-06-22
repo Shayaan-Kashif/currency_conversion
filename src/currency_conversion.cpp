@@ -7,8 +7,15 @@ using namespace std;
 
 namespace CurrencyConversion {
 
+/*
+The purpose of this function is to take in the intial input from the user and then split the dollar and cents amount
+so they can easily be converted to words. After the amount has been spit it is converted to string and then spent into 
+its correspoding function. This funtion will retrive th edollar word amount and cenrts word amount and then put them together 
+and return it to the user.
+*/
 string currency_conversion(double money){
 
+    //Inital varibales
     int dollars, cents, dollar_length, cents_length;
     string dollar_word, cents_word, dollars_result,cents_result, result;
 
@@ -19,22 +26,21 @@ string currency_conversion(double money){
     //Converted to strings
     dollar_word = to_string(dollars);
     cents_word  = to_string(cents);
-
-    //Printing the number of cents in number form
-    //cout<<"Dollars: "<<dollars<<endl;
-    //cout<<"Cents: "<<cents<<endl<<endl;
-
+    
     //Finding the length 
     dollar_length = dollar_word.length(); //max length of 6
-    cents_length = cents_word.length(); // max length of 2
+    cents_length = cents_word.length(); // max length of 1 
 
-    //Calling functions 
-    cents_result = Cents_To_Words(cents_word, cents_length);//Calling the cents to word function
+    //Calling functions which convert dolalrs and cents to words and storing them into the variables below
+    cents_result = Cents_To_Words(cents_word, cents_length);
     dollars_result = Dollars_To_Words(dollar_word, dollar_length);
 
+    //Variables dollar and cent intialized to strings
     string dollar = "Dollar";
     string cent = "Cent";
 
+
+    //The bottom two conditionals are used to determine if an "s" need to be added to the end of either dollar or cent
     if(dollars_result != "One"){
         dollar = "Dollars";
        
@@ -45,20 +51,16 @@ string currency_conversion(double money){
        
     }
 
-
+    //In the result variable the returns of the previous funtions are retrived and the final output is assembled
     result = dollars_result+" " +dollar+ " and "+cents_result+" "+ cent;
-    return result;
-
-    
-    
-
- 
+    return result; //Returning the final output
 
 }
 
 
-
-
+/*
+The purpose of this funtion is to identify the correct word for a single digit between 0-9.
+*/
 string One_Word(string word){
     string word_amount;
 
@@ -105,15 +107,23 @@ string One_Word(string word){
             break;
         }
 
-        return word_amount;// If the number is 0-9 cents only 
+        return word_amount;//Returing the corresponding word for the digit provided  
 
 }
 
 
+/*
+ The purpose of this funtion is to handle cases for 2 digit numbers to words. 
+*/
 string Two_Word(string word, int word_length, bool forCents){
 
     string word_amount;//storing the entire result in this variable
 
+/*
+ The conditioanl below runs if the length of the woprd provided is equal to 1. This would be the case for cents.
+ If the user entered for example 3.07 the 07 cents in the conversion process earlier will enter this funtion as "7" therefore having
+ the length of 1. As such the One_Word funtion is the most sutiable to handle the case.
+*/
     if(word_length == 1){
 
         return One_Word(word);
@@ -121,7 +131,7 @@ string Two_Word(string word, int word_length, bool forCents){
     }
 
 
-    //If the first cent digit is equal to 1 then the pattern would fro from 10-19
+    //If the first digit is 1 then we check the second digit to handle the cases from 10-19
     else if(word[0] == '1'){
         switch (word[1])
         {
@@ -280,8 +290,12 @@ return word_amount;//Returning the string
 }
 
 
+/*
+ The purpose of this funtion is to handle cases for 3 digit numbers to words. 
+*/
 string Three_Word(string dollar_word, int dollar_length){
 
+    //Initial variables
     string dollar_word_amount;
     string hundreds;
     string hundred_word;
@@ -314,12 +328,12 @@ string Three_Word(string dollar_word, int dollar_length){
 
 }
 
-/*Dollar function involves a sub function. The task of the sub-function is to determine 
-what is the word amount between 00-99 dollars. How the overall function will work is that 
-if the dollar amount is 238 then it will split it like 2 and 38 the 2 is in the hundreds place 
-so the output will be 2 hundred the 38 would be sent to the sub-funtion. */
 
 
+/*
+ The purpose of this funtion is to convert the number amount of cents to words. This is done by
+ outsourceing the task the the Two_Word() function which can directly convert 2 digit numbers to words. 
+*/
 string Cents_To_Words(string cents_word, int cents_length){
 
  return Two_Word(cents_word,cents_length,true);
@@ -327,9 +341,23 @@ string Cents_To_Words(string cents_word, int cents_length){
 }
 
 
+/*
+The purpose of the Dollars_To_Words() funtion is to take in the dollar number amount only and generate the dolalr word amount.
+This is achived through checking the length of the number amount given and then using a combination of the 3 funtions which
+handle converting the number amount to word for 1 to 3 digits. The example below showcases how this funtion utilizes
+the other functions to break down larger numbers to easily convert them to words.
 
+Example:
+Dollar Amount: 3 --> Two_Word()
+Dollar Amount: 52 --> Two_Word()
+Dollar Amount: 371 --> One_Word() + Two_Word()
+Dollar Amount: 2853 --> One_Word() + Three_Word()
+Dollar Amount: 62814 --> Two_Word() + Three_Word()
+Dollar Amount: 842317 --> Three_Word() + Three_Word()
+ */
 string Dollars_To_Words(string dollar_word, int dollar_length){
 
+    //Initial variables 
     string dollar_word_amount;
     string dollars_results;
 
@@ -341,24 +369,25 @@ string Dollars_To_Words(string dollar_word, int dollar_length){
     int length;
     int length2;
 
-
+    //Handles digits between 1 to 2 
     if(dollar_length == 1 || dollar_length == 2){
 
        dollar_word_amount = Two_Word(dollar_word, dollar_length, false);
 
         return dollar_word_amount;
 
-    }
+    }//End of if statment
 
-
+    //Handles 3 digits numbers
     if(dollar_length == 3){
 
         dollar_word_amount = Three_Word(dollar_word, dollar_length);
 
         return dollar_word_amount;
 
-    }
+    }//End of if statment 
 
+    //Handles 4 digit numbers
     else if(dollar_length == 4){
 
         for(int i = 0; i<=dollar_length-1; i++){
@@ -384,9 +413,9 @@ string Dollars_To_Words(string dollar_word, int dollar_length){
 
         return dollar_word_amount;
 
-    }
+    }//End of Else if statment
 
-
+    //Handles 5 digit numbers
     else if(dollar_length == 5){
         for(int i = 0; i<=dollar_length-1; i++){
 
@@ -411,8 +440,9 @@ string Dollars_To_Words(string dollar_word, int dollar_length){
 
         return dollar_word_amount;
 
-    }
+    }//End of else if statment
 
+    //Handles 6 digit numbers
     else{
 
         for(int i = 0; i<=dollar_length-1; i++){
@@ -438,16 +468,11 @@ string Dollars_To_Words(string dollar_word, int dollar_length){
 
     return dollar_word_amount;
 
-    }
+    }//End of else statment
+
+}//End of function
 
 
 
-
-
-
-}
-
-
-
-}
+}//End of namespace
 
