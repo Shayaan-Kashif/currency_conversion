@@ -11,6 +11,7 @@ namespace CurrencyConversion {
     std::string Three_Word(std::string dollar_word, int dollar_length);
     std::string Cents_To_Words(std::string cents_word, int cents_length);
     std::string Dollars_To_Words(std::string dollar_word, int dollar_length);
+    std::string currencyWordsToAmount(std::string word);
 
 }
 

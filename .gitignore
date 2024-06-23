@@ -1,5 +1,6 @@
 # Ignore the main.cpp file
-src/main.cpp
+src/test.cpp
+src/words_to_numbers.cpp
 
 # Ignore the generated executable in the src folder
-src/main
+src/test

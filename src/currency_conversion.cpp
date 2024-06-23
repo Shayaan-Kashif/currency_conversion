@@ -119,20 +119,8 @@ string Two_Word(string word, int word_length, bool forCents){
 
     string word_amount;//storing the entire result in this variable
 
-/*
- The conditioanl below runs if the length of the woprd provided is equal to 1. This would be the case for cents.
- If the user entered for example 3.07 the 07 cents in the conversion process earlier will enter this funtion as "7" therefore having
- the length of 1. As such the One_Word funtion is the most sutiable to handle the case.
-*/
-    if(word_length == 1){
-
-        return One_Word(word);
-
-    }
-
-
     //If the first digit is 1 then we check the second digit to handle the cases from 10-19
-    else if(word[0] == '1'){
+    if(word[0] == '1'){
         switch (word[1])
         {
         case '0':
@@ -336,7 +324,13 @@ string Three_Word(string dollar_word, int dollar_length){
 */
 string Cents_To_Words(string cents_word, int cents_length){
 
- return Two_Word(cents_word,cents_length,true);
+    if(cents_length == 1){
+        return One_Word(cents_word);
+    }
+
+    else{
+        return Two_Word(cents_word,cents_length,true);
+    }
 
 }
 
@@ -348,9 +342,9 @@ handle converting the number amount to word for 1 to 3 digits. The example below
 the other functions to break down larger numbers to easily convert them to words.
 
 Example:
-Dollar Amount: 3 --> Two_Word()
+Dollar Amount: 3 --> One_Word()
 Dollar Amount: 52 --> Two_Word()
-Dollar Amount: 371 --> One_Word() + Two_Word()
+Dollar Amount: 371 --> Three_Word()
 Dollar Amount: 2853 --> One_Word() + Three_Word()
 Dollar Amount: 62814 --> Two_Word() + Three_Word()
 Dollar Amount: 842317 --> Three_Word() + Three_Word()
@@ -369,8 +363,19 @@ string Dollars_To_Words(string dollar_word, int dollar_length){
     int length;
     int length2;
 
-    //Handles digits between 1 to 2 
-    if(dollar_length == 1 || dollar_length == 2){
+
+    //Handles 1 digit numbers 
+    if(dollar_length == 1){
+
+        dollar_word_amount = One_Word(dollar_word);
+
+        return dollar_word_amount;
+
+    }
+
+
+    //Handles 2 digit numbers
+    if(dollar_length == 2){
 
        dollar_word_amount = Two_Word(dollar_word, dollar_length, false);
 
